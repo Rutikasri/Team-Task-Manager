@@ -15,13 +15,16 @@ function Signup() {
   const navigate = useNavigate()
 
   const handleChange = (e) => {
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     })
+
   }
 
   const handleSubmit = async (e) => {
+
     e.preventDefault()
 
     try {
@@ -30,14 +33,22 @@ function Signup() {
         "/auth/signup",
         formData
       )
-      
-      toast.success("Signup successful")
+
+      toast.success(
+        "Signup successful"
+      )
 
       navigate("/")
 
     } catch (error) {
 
-      toast.error(error.response.data.message)
+      console.log(error)
+
+      toast.error(
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong"
+      )
 
     }
   }
@@ -85,6 +96,7 @@ function Signup() {
         </button>
 
         <p className="text-center text-white mt-6">
+
           Already have an account?
 
           <Link
@@ -93,6 +105,7 @@ function Signup() {
           >
             Login
           </Link>
+
         </p>
 
       </motion.form>
